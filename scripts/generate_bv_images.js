@@ -2,7 +2,13 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const KIE_API_KEY = '29bab9690fd4e4ace8facd45549aaeba';
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+const KIE_API_KEY = process.env.KIE_API_KEY;
+if (!KIE_API_KEY) {
+    console.error('Missing KIE_API_KEY. Add it to the .env file in the project root.');
+    process.exit(1);
+}
 const HEADERS = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${KIE_API_KEY}`
